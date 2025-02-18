@@ -35,22 +35,5 @@ export default function Processing() {
     return () => clearInterval(interval);
   }, [messages]);
 
-  return (
-    // <div className='fixed h-dvh w-screen bg-black bg-opacity-90 flex flex-col items-center justify-center z-30 backdrop-blur-[4px]'>
-    //   <span className='text-white text-3xl max-w-[55ch] text-center'>
-    //     {currentMessage}
-    //   </span>
-    //   <img
-    //     className='w-10 h-10 mt-4'
-    //     src='https://cdn.pixabay.com/animation/2022/07/29/03/42/03-42-07-846_512.gif'
-    //     alt='processing'
-    //   />
-    // </div>
-
-    <span>
-      {currentMessage}
-    </span>
-
-    
-  );
+  return <span>{currentMessage}</span>;
 }

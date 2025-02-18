@@ -26,7 +26,7 @@ export default async function main(base64code, stylePrompt) {
           content: [
             {
               type: "text",
-              text: "Describe the person or people and their suroundings in the image.",
+              text: "Describe the person or people and their surroundings in the image.",
             },
             {
               type: "image_url",

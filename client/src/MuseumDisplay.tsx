@@ -1,7 +1,7 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import GalleryMainCanvas from "./GalleryMainCanvas";
 import { useImage } from "./context/ImageContext";
-import { io, Socket } from "socket.io-client";
+import { io } from "socket.io-client";
 
 export default function MuseumDisplay() {
   const {
@@ -13,7 +13,6 @@ export default function MuseumDisplay() {
     loading,
     setImageState,
   } = useImage();
-  const hasMounted = useRef(false);
 
   // Update currentIndex every 15 seconds to show next image
   useEffect(() => {
@@ -23,21 +22,11 @@ export default function MuseumDisplay() {
         DBImages.length ? (prevIndex + 1) % DBImages.length : 0
       );
       console.log("Current index: ", currentIndex);
-    }, 5 * 1000);
+    }, 15 * 1000);
 
     return () => clearInterval(displayInterval);
-  }, [DBImages]); // Ensure this updates when DBImages changes
+  }, [DBImages]);
 
-  // useEffect(() => {
-  //   if (hasMounted.current) {
-  //     const displayInterval = setInterval(() => {
-  //       setImageState(true)
-  //     }, 15*1000);
-  //     return () => clearInterval(displayInterval);
-  //   } else {
-  //     hasMounted.current = true;
-  //   }
-  // }, []);
   useEffect(() => {
     const socket = io("http://localhost:3000/gallery");
 
@@ -72,7 +61,10 @@ export default function MuseumDisplay() {
       {currentArt ? (
         <GalleryMainCanvas
           key={currentArt._id}
-          artTitle={currentArt.art_title}
+          artTitle={currentArt.art_title.replace(
+            /[&\/\\#,+()$~%.'":*?<>{}]/g,
+            ""
+          )}
           mainGeneratedArt={currentArt.url}
           leftGeneratedArt={leftImage.url}
           rightGeneratedArt={rightImage.url}

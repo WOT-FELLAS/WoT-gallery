@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "./AiArtMirror.css";
-import ImageModal from "@/ImageModal";
 import AiImagePreview from "./AiImagePreview";
-import Processing from "./Processing";
 import SelectStyle from "./SelectStyle";
 import { Style } from "./styles";
 import io from "socket.io-client";
@@ -30,12 +28,8 @@ export default function AiArtMirror() {
   const [transcription, setTranscription] = useState<string | null>(null);
   const [imageTitle, setImageTitle] = useState<string | null>(null);
 
-  console.log("recievedImg", recievedImg);
-  console.log(imageTitle);
-
   useEffect(() => {
     socket.on("style-changed", (style) => {
-      console.log(`Received style change:`, style);
       setSelectedStyle(style);
     });
 
@@ -199,7 +193,6 @@ export default function AiArtMirror() {
         const transcript = event.results[event.resultIndex][0].transcript
           .trim()
           .toLowerCase();
-        console.log("Voice input: ", transcript);
         setTranscription(transcript);
       };
 
@@ -276,7 +269,6 @@ export default function AiArtMirror() {
     setTimeout(() => setBlitz(false), 500);
   };
 
-  // SKAL BRUKES TIL Å SENDE IMG TIL BACKEND
   const handleConfirmScreenshot = async () => {
     setIsProcessing(true);
     runToastProcessing();
@@ -324,12 +316,6 @@ export default function AiArtMirror() {
     setImageData(null);
   };
 
-  const handleCancelScreenshot = () => {
-    setShowPreview(false);
-    setImageData(null);
-    setShowCapturePhotoButtons(true);
-  };
-
   const handleRecievedImg = (img: string | null) => {
     setRecievedImg(img);
     setImageData(null);
@@ -339,9 +325,7 @@ export default function AiArtMirror() {
 
   const handleStyleSelect = (style: Style) => {
     setSelectedStyle(style);
-    console.log("here", selectedStyle);
     setStyleDropdownOpen(false);
-    console.log("Selected style via voice:", style.name);
   };
 
   const handleGoBack = () => {
@@ -367,9 +351,6 @@ export default function AiArtMirror() {
       }
     }
   }, [isProcessing]);
-  console.log("ÆÆÆÆÆÆÆÆÆÆÆ recievedImg", recievedImg);
-  console.log("ÆÆÆÆÆÆÆÆÆÆÆ imageData", imageData);
-  console.log("ÆÆÆÆÆÆÆÆÆÆÆ showPreview", showPreview);
 
   const runToastSuccess = () =>
     toast.success("AI image sent to Gallery!", {
@@ -381,26 +362,24 @@ export default function AiArtMirror() {
       draggable: true,
       progress: undefined,
       theme: "light",
-      // transition: Bounce,
     });
 
-    const runToastProcessing = () =>
-      toast.info("Photo captured! This will not be saved.", {
-        position: "bottom-center",
-        autoClose: 10000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        // transition: Bounce,
-      });
+  const runToastProcessing = () =>
+    toast.info("Photo captured! This will not be saved.", {
+      position: "bottom-center",
+      autoClose: 10000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
 
   return (
     <>
       <ToastContainer
-      className={"ml-[400px]"}
+        className={"ml-[400px]"}
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -410,7 +389,6 @@ export default function AiArtMirror() {
         draggable
         pauseOnHover
         theme='light'
-        // transition: Bounce,
       />
       <div
         className='grid h-screen bg-[#F0E8D9]'
@@ -451,12 +429,7 @@ export default function AiArtMirror() {
                 src={imageData || undefined}
               />
               <div className='absolute top-0 w-full h-[90%] flex justify-center items-center  mt-[40px] mr-[40px] mb-[40px]'>
-                {/* <img
-                  className='w-auto'
-                  src='https://discuss.wxpython.org/uploads/default/original/2X/6/6d0ec30d8b8f77ab999f765edd8866e8a97d59a3.gif'
-                  alt=''
-                /> */}
-                <div className="spinner"></div>
+                <div className='spinner'></div>
               </div>
             </>
           ) : !recievedImg && !showPreview ? (
@@ -484,22 +457,6 @@ export default function AiArtMirror() {
             </div>
           )}
 
-          {/* {showPreview && imageData && (
-            <>
-              <ImageModal
-                title={`Do you want to transform this image into "${
-                  selectedStyle ? selectedStyle.name : ""
-                }" style?`}
-                confirmText='Yes'
-                declineText='Try again'
-                imgSrc={imageData}
-                openModule={showPreview}
-                cancelMoodScreenshot={handleCancelScreenshot}
-                confirmMoodScreenshot={handleConfirmScreenshot}
-              />
-            </>
-          )} */}
-
           {transcription && (
             <div className='absolute bottom-0 right-0 w-full mb-4 transcription-wrapper'>
               <div className='h-auto text-white bg-black bg-opacity-50 transcription-container'>
@@ -509,17 +466,6 @@ export default function AiArtMirror() {
           )}
         </div>
       </div>
-      {/* {recievedImg && (
-        <AiImagePreview
-          openModule
-          title='Send to gallery?'
-          artStyle={selectedStyle ? selectedStyle.name : ""}
-          artTitle={imageTitle || ""}
-          absoluteImage={recievedImg}
-          handleImageData={handleRecievedImg}
-          relativeImg={relativeImg || ""}
-        />
-      )} */}
     </>
   );
 }

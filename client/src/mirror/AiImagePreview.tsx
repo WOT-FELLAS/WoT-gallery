@@ -1,6 +1,5 @@
-import { useEffect, useState, useRef } from "react";
-import { useImage } from "../context/ImageContext";
-import { io, Socket } from "socket.io-client";
+import { useState } from "react";
+import { io } from "socket.io-client";
 
 interface AiImagePreviewProps {
   artStyle: string;
@@ -18,10 +17,9 @@ export default function AiImagePreview({
   artTitle,
   runToastSuccess,
 }: AiImagePreviewProps) {
-  const { newArtUploaded } = useImage();
   const [isFocusedIndex0, setIsFocusedIndex0] = useState(false);
   const [isFocusedIndex1, setIsFocusedIndex1] = useState(false);
-  const socket = io("http://localhost:3000/gallery")
+  const socket = io("http://localhost:3000/gallery");
 
   const handleSubmitArt = async () => {
     // The data object to be sent in the POST request
@@ -44,16 +42,11 @@ export default function AiImagePreview({
       const data = await response.json();
 
       if (response.status === 201) {
-        console.log("AI art created successfully!");
-        console.log(data); // The saved AI art object returned from the server
         handleImageData(null);
         runToastSuccess();
 
         // Notify the WebSocket about the new image
-          socket.emit("new-image");  // Emit new image data to the WebSocket server
-
-        // Call the context function that initiates the process of adding a new picture to the gallery
-        newArtUploaded();
+        socket.emit("new-image"); // Emit new image data to the WebSocket server
       } else {
         console.log("Error creating AI art");
         console.error(data);
@@ -64,7 +57,6 @@ export default function AiImagePreview({
   };
 
   return (
-    // <div  className=''>
     <div
       className='flex flex-col relative pt-[15dvh] left-[2dvw] items-center'
       aria-describedby={undefined}
@@ -98,7 +90,7 @@ export default function AiImagePreview({
             </p>
           </div>
           <div className='flex gap-12'>
-          <button
+            <button
               tabIndex={1}
               type='button'
               onFocus={() => setIsFocusedIndex1(true)}
@@ -154,7 +146,6 @@ export default function AiImagePreview({
                 />
               )}
             </button>
-           
           </div>
         </div>
       </div>
