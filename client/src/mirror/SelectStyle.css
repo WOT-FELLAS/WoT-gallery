@@ -177,36 +177,36 @@
   font-style: normal;
 }
 
-.focus-card-1:focus,
-.focus-card-1:focus-visible {
+.focus-card-1,
+.focus-card-1 {
   background-color: #e28585;
   outline: 0;
 }
-.focus-card-2:focus,
-.focus-card-2:focus-visible {
+.focus-card-2,
+.focus-card-2 {
   background-color: #df8e53;
   outline: 0;
 }
-.focus-card-3:focus,
-.focus-card-3:focus-visible {
+.focus-card-3,
+.focus-card-3 {
   background-color: #f2d759;
   outline: 0;
 }
 
-.focus-card-4:focus,
-.focus-card-4:focus-visible {
+.focus-card-4,
+.focus-card-4 {
   background-color: #7dbf68;
   outline: 0;
 }
 
-.focus-card-5:focus,
-.focus-card-5:focus-visible {
+.focus-card-5,
+.focus-card-5{
   background-color: #9d9fc5;
   outline: 0;
 }
 
-.focus-card-6:focus,
-.focus-card-6:focus-visible {
+.focus-card-6,
+.focus-card-6{
   background-color: #d8a7e4;
   outline: 0;
 }

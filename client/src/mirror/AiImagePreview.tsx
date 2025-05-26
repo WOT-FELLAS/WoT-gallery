@@ -95,11 +95,11 @@ export default function AiImagePreview({
               type='button'
               onFocus={() => setIsFocusedIndex1(true)}
               onBlur={() => setIsFocusedIndex1(false)}
-              className={`selectedTabIndex albert-sans-regular flex items-center w-[10dvw] justify-around text-[20px] text-[#7A0B0B] rounded
+              className={`hover:scale-[1.02] transition-all selectedTabIndex albert-sans-regular flex items-center w-[10dvw] justify-around text-[20px] text-[#7A0B0B] rounded
                 ${
                   isFocusedIndex1
                     ? "bg-[#7A0B0B] text-[#F0E8D9] border border-[#6c1b1b] animate-pulse-tab"
-                    : "border border-[#D4BD91] underline"
+                    : "border border-[#D4BD91] "
                 }
                 `}
               onClick={() => {
@@ -127,24 +127,12 @@ export default function AiImagePreview({
               type='submit'
               onFocus={() => setIsFocusedIndex0(true)}
               onBlur={() => setIsFocusedIndex0(false)}
-              className={`selectedTabIndex albert-sans-regular rounded w-[12dvw] flex items-center justify-between  text-[20px] px-[12px] py-[8px] 
-                ${
-                  isFocusedIndex0
-                    ? "bg-[#3B6246] border border-[#0F281C] text-[#F0E8D9] animate-pulse-tab"
-                    : "text-[#3B6246] underline border border-[#D4BD91]"
-                }`}
+              className={`hover:scale-[1.02] transition-all  selectedTabIndex albert-sans-regular rounded w-[12dvw] flex items-center justify-between  text-[20px] px-[12px] py-[8px] bg-[#3B6246] border border-[#0F281C] text-[#F0E8D9] animate-pulse-tab 
+               `}
               onClick={() => handleSubmitArt()}
             >
               <span>SEND TO GALLERY</span>
-              {isFocusedIndex0 ? (
                 <img src='assets/icons/shareArrow.png' alt='' className='' />
-              ) : (
-                <img
-                  src='assets/icons/shareArrowGreen.png'
-                  alt=''
-                  className=''
-                />
-              )}
             </button>
           </div>
         </div>

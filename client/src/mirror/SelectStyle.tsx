@@ -92,15 +92,15 @@ const SelectStyle = ({
                       <span>SELECT</span> <span>ART STYLE</span>
                     </span>
                     <div className="flex items-center gap-2 mt-[-45px]">
-                      <img src="assets/icons/remote.png" alt="" />
-                      <p className="akatab-regular text-[20px]">use the controller to navigate</p>
+                      <img className="w-[25px]" src="assets/icons/computer-mouse-svgrepo-com.svg" alt="" />
+                      <p className="akatab-regular text-[20px]">use the mouse to navigate</p>
                     </div>
                   </div>
                   <div className='w-full justify-around gap-[40px] grid grid-cols-2 grid-rows-3'>
                     {styles.map((style) => (
                       <button
                         key={style.id}
-                        className={`w-[240px] p-2 overflow-hidden cursor-pointer card dropdown-item hover:bg-blue-500 hover:text-white aboreto-regular focus-card-${style.id}`}
+                        className={`hover:scale-[1.02] transition-all w-[240px] p-2 overflow-hidden cursor-pointer card dropdown-item  hover:text-white aboreto-regular focus-card-${style.id}`}
                         onClick={() => handleSelectStyle(style)}
                         tabIndex={1}
                       >
@@ -194,21 +194,11 @@ const SelectStyle = ({
                       }}
                       onFocus={() => setIsFocusedIndex1(true)}
                       onBlur={() => setIsFocusedIndex1(false)}
-                      className={`flex items-center justify-between px-[12px] py-[8px] w-full rounded selectedTabIndex ${
-                        isFocusedIndex1
-                          ? "bg-[#7A0B0B] text-[#F0E8D9] border-[#7A0B0B]"
-                          : "bg-[#F0E8D9] text-[#7A0B0B] border-[#7A0B0B] hover:bg-[#7A0B0B] hover:text-[#F0E8D9] hover:border-[#7A0B0B] "
-                      } `}
+                      className={`hover:scale-[1.02] transition-all flex items-center justify-between px-[12px] py-[8px] w-full rounded selectedTabIndex bg-[#7A0B0B] text-[#F0E8D9] border-[#7A0B0B] `}
                     >
-                      {isFocusedIndex1 ? (
                         <img src='assets/icons/arrow-left-white.png' alt='' />
-                      ) : (
-                        <img src='assets/icons/arrow-left-red.png' alt='' />
-                      )}
                       <span
-                        className={` albert-sans-regular text-[20px] underline ${
-                          isFocusedIndex1 ? "text-[#F0E8D9]" : "text-[#7A0B0B]"
-                        }`}
+                        className={` albert-sans-regular text-[20px]  text-[#F0E8D9] `}
                       >
                         GO BACK
                       </span>
@@ -218,23 +208,15 @@ const SelectStyle = ({
                       onClick={onCapturePhoto}
                       onFocus={() => setIsFocusedIndex0(true)}
                       onBlur={() => setIsFocusedIndex0(false)}
-                      className={`rounded w-full flex items-center justify-between px-[12px] py-[8px] border text-[20px] albert-sans-regular ${
-                        isFocusedIndex0
-                          ? "selectedTabIndex bg-[#3B6246] border-[#0F281C] text-[#F0E8D9]"
-                          : "selectedTabIndex bg-[#F0E8D9] text-[#0F281C] hover:bg-[#3B6246] hover:text-[#F0E8D9] underline"
-                      }`}
+                      className={`hover:scale-[1.02] transition-all rounded w-full flex items-center justify-between px-[12px] py-[8px] border text-[20px] albert-sans-regular selectedTabIndex bg-[#3B6246] border-[#0F281C] text-[#F0E8D9]`}
                     >
                       TAKE PICTURE
-                      {isFocusedIndex0 ? (
                         <img src='assets/icons/camera.png' alt='' />
-                      ) : (
-                        <img src='assets/icons/camera-green.png' alt='' />
-                      )}
                     </button>
                   </div>
                   <div>
                     <div>
-                      <p className='text-center pb-4'>
+                      <p className='pb-4 text-center'>
                         Other peoples AI art within {selectedStyle.name}
                       </p>
                     </div>
