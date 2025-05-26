@@ -95,31 +95,19 @@ export default function AiImagePreview({
               type='button'
               onFocus={() => setIsFocusedIndex1(true)}
               onBlur={() => setIsFocusedIndex1(false)}
-              className={`hover:scale-[1.02] transition-all selectedTabIndex albert-sans-regular flex items-center w-[10dvw] justify-around text-[20px] text-[#7A0B0B] rounded
-                ${
-                  isFocusedIndex1
-                    ? "bg-[#7A0B0B] text-[#F0E8D9] border border-[#6c1b1b] animate-pulse-tab"
-                    : "border border-[#D4BD91] "
-                }
+              className={`hover:scale-[1.02] transition-all selectedTabIndex albert-sans-regular flex items-center w-[10dvw] justify-around text-[20px] text-[#7A0B0B] rounded bg-[#7A0B0B] text-[#F0E8D9] border border-[#6c1b1b] animate-pulse-tab
+               
                 `}
               onClick={() => {
                 handleImageData(null);
                 setIsFocusedIndex1(false);
               }}
             >
-              {isFocusedIndex1 ? (
                 <img
                   src='assets/icons/arrow-left-white.png'
                   alt=''
                   className=''
                 />
-              ) : (
-                <img
-                  src='assets/icons/arrow-left-red.png'
-                  alt=''
-                  className=''
-                />
-              )}
 
               <span>BACK TO START</span>
             </button>
